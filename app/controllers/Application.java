@@ -36,8 +36,10 @@ public class Application extends Controller {
         if (u.getType().equals(Constants.User.TEACHER)){
             List<User> students = User.loadStudents();
             render("Application/teacher.html", u, students);
-        }else{
+        }else if(u.getType().equals(Constants.User.STUDENT)){
             render("Application/student.html", u);
+        } else {
+            render("Application/undefined.html", u);
         }
     }
 

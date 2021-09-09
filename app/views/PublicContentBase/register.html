@@ -5,6 +5,23 @@
     <script>
     $(document).ready(function(){
 
+
+        $('#type').change(function(){
+
+            if($("#type option:selected").val() == 'teacher')
+            {
+                teacher_required = true;
+                $('#teacher_code').show();
+            }
+            else
+            {
+                teacher_required = false;
+                $('#teacher_code').hide();
+            }
+        });
+
+
+
         $('#register-submit').click(function(){
             result = validateForm();
 
@@ -37,6 +54,13 @@
                 return false;
             }
 
+            var teacher_code = document.forms["reg-form"]["code"].value;
+
+            if (teacher_code == "" && teacher_required == true) {
+                alert("Teacher code must be filled out");
+                return false;
+            }
+
             return true;
         }
     });
@@ -46,9 +70,13 @@
 #{form @processRegister(), id:'form', name:'reg-form'}
 <h2 class="text-left">&{'Public.register.title'}</h2>
 
-#{ifErrors}
-<div id="register_error" class="error">${errors[0]}</div>
-#{/ifErrors}
+#{if flash.error}
+<p class="error">
+    &{flash.error}
+</p>
+#{/if}
+
+
 
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -59,25 +87,37 @@
                 <input class="form-control" type="text" value="${flash.name}" placeholder="&{'Public.register.name'}" id="username" name="username" />
             </div>
         </div>
+
         <div class="form-group">
             <div class="input-icon">
-                <em class="fa fa-lock"></em>
+                <i class="fa fa-lock"></i>
                 <input class="form-control" type="password" autocomplete="off" name="password" id="password" value="" placeholder="&{'Public.register.password'}" />
             </div>
         </div>
+
         <div class="form-group">
             <div class="input-icon">
-                <em class="fa fa-lock"></em>
+                <i class="fa fa-lock"></i>
                 <input class="form-control" type="password" autocomplete="off" name="passwordCheck" id="passwordCheck" value="" placeholder="&{'Public.register.passwordCheck'}" />
             </div>
         </div>
 
-        <div>
-            <input type="radio" name="type" value="teacher">Teacher
-            <input type="radio" name="type" value="student">Student
+        <div class="form-group">
+            <div class="input-icon">
+                <select class="form-control" name="type" id="type">
+                  <option value="student" selected="selected">Student</option>
+                  <option value="teacher">Teacher</option>
+                </select>
+            </div>
         </div>
 
 
+        <div class="form-group" id="teacher_code" style="display:none">
+            <div class="input-icon">
+                <i class="fa fa-user"></i>
+                <input class="form-control" type="text" value="${flash.code}" placeholder="&{'Public.register.teacher_code'}" id="code" name="code" />
+            </div>
+        </div>
 
     </div>
 </div>

@@ -11,6 +11,7 @@ Public.login.forgot.link=here
 Public.login.create.description=Don't have an account yet?
 Public.login.create.link=Create an account
 Public.login.error.credentials=Invalid credentials
+Public.signin.error.teacher_code
 
 
 ##### Register #####
@@ -24,3 +25,6 @@ Public.register.validation.name=Please enter a display name we can use to addres
 Public.register.validation.password=Please enter a password
 Public.register.validation.passwordConfirmation=Please confirm your password
 Public.register.validation.existingAccount=This account is already registered. Forgot your password?
+Public.register.teacher_code=Teacher´s code
+
+Public.register.error.teacher_code=The teacher´s code is invalid.
